@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Open Air Food Court</title>
+    <style>
+      body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f7f7fb; color: #1f2933; }
+      header { background: #0f766e; color: #fff; padding: 18px 24px; }
+      main { max-width: 1100px; margin: 0 auto; padding: 20px; }
+      .card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 20px; }
+      h3 { margin-top: 0; }
+      .row { display: flex; flex-wrap: wrap; gap: 14px; }
+      label { font-size: 12px; font-weight: 600; color: #4b5563; margin-bottom: 6px; display: block; }
+      input, select { padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; min-width: 200px; }
+      button { border: none; border-radius: 8px; padding: 10px 14px; cursor: pointer; font-weight: 600; }
+      button.primary { background: #0f766e; color: #fff; }
+      button.secondary { background: #1f2937; color: #fff; }
+      button.danger { background: #b91c1c; color: #fff; }
+      table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+      th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #e5e7eb; }
+      th.right, td.right { text-align: right; }
+      #orders > .order-card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; background: #fff; }
+      .badge { background: #d1fae5; color: #065f46; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+      .waiter-status-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+      .waiter-pill { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+      .waiter-pill.free { background: #dcfce7; color: #065f46; }
+      .waiter-pill.engaged { background: #fee2e2; color: #991b1b; }
+      .status-dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h2>Open Air Food Court</h2>
+      <p style="margin:4px 0 0 0;">Orders • Tables • Waiters</p>
+    </header>
+    <main>
+      <section class="card">
+        <h3>Create Order</h3>
+        <div class="row">
+          <div>
+            <label>Table Number</label>
+            <input id="tableNumber" type="number" min="1" placeholder="Table #" />
+          </div>
+          <div>
+            <label>Customer Name</label>
+            <input id="customerName" type="text" placeholder="Optional" />
+          </div>
+          <div>
+            <label>Customer Phone</label>
+            <input id="customerPhone" type="tel" placeholder="Optional" />
+          </div>
+          <div style="flex:1;">
+            <label>Assign Waiter</label>
+            <select id="waiterSelect"></select>
+            <div class="waiter-status-list" id="waiterStatusList"></div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:16px; align-items:end;">
+          <div>
+            <label>Menu Item</label>
+            <select id="itemSelect"></select>
+          </div>
+          <div>
+            <label>Quantity</label>
+            <input id="itemQty" type="number" min="1" value="1" />
+          </div>
+          <div>
+            <button class="primary" id="addItemBtn">Add Item</button>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th class="right">Price</th>
+              <th class="right">Qty</th>
+              <th class="right">Line Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="orderLines"></tbody>
+          <tfoot>
+            <tr>
+              <th colspan="3" class="right">Total</th>
+              <th class="right" id="orderTotal">₹0.00</th>
+              <th></th>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="primary" id="submitOrderBtn">Submit Order</button>
+          <button class="secondary" id="resetBtn">Reset</button>
+          <button class="danger" id="dayEndBtn" style="margin-left:auto;">Day End & Export</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Recent Orders</h3>
+        <div id="orders"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/frontend/src/app.js"></script>
+  </body>
+</html>
+

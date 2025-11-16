@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Waiter Console - Food Court</title>
+    <style>
+      body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #0b1120; color: #f1f5f9; }
+      header { padding: 20px 24px; background: #0f172a; }
+      main { max-width: 640px; margin: 0 auto; padding: 24px; }
+      .card { background: #1f2937; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.25); }
+      label { display: block; font-size: 13px; color: #cbd5f5; margin-bottom: 6px; }
+      input { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid #374151; background: #111827; color: #f9fafb; }
+      button { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #16a34a; color: #fff; font-weight: 600; cursor: pointer; margin-top: 12px; }
+      button.secondary { background: #475569; }
+      button.inline { width: auto; padding: 8px 12px; margin-left: 8px; margin-top: 0; }
+      .orders-list { display: flex; flex-direction: column; gap: 12px; }
+      .order-card { background: #0f172a; border-radius: 12px; padding: 16px; border: 1px solid #1d283a; }
+      .order-card h4 { margin: 0 0 4px 0; font-size: 18px; }
+      .meta { font-size: 13px; color: #94a3b8; }
+      ul { margin: 8px 0 0 16px; color: #e2e8f0; }
+      .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 12px; }
+      .status-pill.free { background: #16a34a20; color: #4ade80; }
+      .status-pill.engaged { background: #dc262620; color: #fca5a5; }
+      .status-dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Waiter Console</h1>
+      <p style="margin: 4px 0 0 0; color: #94a3b8;">View your assigned tables and orders</p>
+    </header>
+    <main>
+      <section class="card" id="loginCard">
+        <h3>Login</h3>
+        <p style="font-size:14px;color:#cbd5f5;">Enter the phone number registered for your profile.</p>
+        <label>Phone Number</label>
+        <input id="loginPhone" type="tel" placeholder="e.g. 9876543210" />
+        <button id="loginBtn">Sign In</button>
+      </section>
+
+      <section class="card" id="dashboardCard" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+          <div>
+            <h3 style="margin:0;">Hello, <span id="waiterName"></span></h3>
+            <p class="meta" style="margin:4px 0 0 0;">Phone: <span id="waiterPhone"></span></p>
+            <p class="meta" style="margin:6px 0 0 0;">Status:
+              <span id="waiterStatusBadge" class="status-pill free"><span class="status-dot"></span><span id="waiterStatusText">Free</span></span>
+            </p>
+          </div>
+          <div>
+            <button class="secondary inline" id="refreshBtn">Refresh</button>
+            <button class="secondary inline" id="markFreeBtn">Mark Free</button>
+            <button class="secondary inline" id="markEngagedBtn">Mark Engaged</button>
+            <button class="secondary inline" id="logoutBtn">Log out</button>
+          </div>
+        </div>
+        <h4 style="margin-top:18px;">Assigned Orders</h4>
+        <div id="ordersEmpty" class="meta">No orders assigned yet.</div>
+        <div class="orders-list" id="ordersList"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/waiter/app.js"></script>
+  </body>
+</html>
+
